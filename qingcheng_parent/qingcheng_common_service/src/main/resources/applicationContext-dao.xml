@@ -19,14 +19,29 @@
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">
+
 					<property name="properties">
 						<value>
 							dialect=mysql
+							reasonable=true
 						</value>
 					</property>
 				</bean>
 			</array>
 		</property>
+		<!--&lt;!&ndash;配置分页插件&ndash;&gt;
+		<property name="plugins">
+			<array>
+				<bean class="com.github.pagehelper.PageInterceptor">
+					<property name="properties">
+						<props>
+							<prop key="helperDialect">mysql</prop>
+							<prop key="reasonable">true</prop>
+						</props>
+					</property>
+				</bean>
+			</array>
+		</property>-->
 	</bean>
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.qingcheng.service" />

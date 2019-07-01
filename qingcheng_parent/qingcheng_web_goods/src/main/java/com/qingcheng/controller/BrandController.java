@@ -27,7 +27,7 @@ public class BrandController {
     public PageInfo<Brand> findAllByPage(int page, int size) {
 
         List<Brand> brandList = brandService.findAllByPage(page, size);
-        PageInfo<Brand> pageInfo = new PageInfo<>(brandList);
+        PageInfo<Brand> pageInfo = new PageInfo<Brand>(brandList);
         return pageInfo;
     }
 
