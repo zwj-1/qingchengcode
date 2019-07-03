@@ -1,10 +1,13 @@
 package com.qingcheng.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.qingcheng.pojo.goods.Brand;
 import com.qingcheng.service.goods.BrandMapper;
 import com.qingcheng.service.goods.BrandService;
+
+import entry.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
@@ -24,9 +27,10 @@ public class BrandServiceImpl implements BrandService {
 
     //分页查询全部
     @Override
-    public List<Brand> findAllByPage(int page, int size) {
+    public PageResult<Brand> findAllByPage(int page, int size) {
         PageHelper.startPage(page, size);
-        return brandMapper.selectAll();
+        Page<Brand> pageResult= (Page<Brand>) brandMapper.selectAll();
+        return new PageResult<>( pageResult.getTotal(), pageResult.getResult());
     }
 
     //搜索条件查询全部
@@ -48,7 +52,7 @@ public class BrandServiceImpl implements BrandService {
 
     //分页搜索条件查询全部
     @Override
-    public List findAllBySearchAndPage(Map searchMap, int page, int size) {
+    public PageResult<Brand> findAllBySearchAndPage(Map searchMap, int page, int size) {
         PageHelper.startPage(page, size);
         Example example = new Example(Brand.class);
         Example.Criteria criteria = example.createCriteria();
@@ -60,7 +64,8 @@ public class BrandServiceImpl implements BrandService {
                 criteria.andLike("letter", "%" + (String) searchMap.get("letter") + "%");
             }
         }
-        return brandMapper.selectByExample(example);
+        Page<Brand> pageResult= (Page<Brand>) brandMapper.selectByExample(example);
+        return new PageResult<>( pageResult.getTotal(), pageResult.getResult());
     }
 
     //根据ID查询

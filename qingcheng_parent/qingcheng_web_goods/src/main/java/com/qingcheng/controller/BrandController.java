@@ -1,9 +1,12 @@
 package com.qingcheng.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
 import com.qingcheng.pojo.goods.Brand;
 import com.qingcheng.service.goods.BrandService;
+import entry.PageResult;
 import entry.Result;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +27,14 @@ public class BrandController {
 
     //分页查询全部
     @RequestMapping("/findAllByPage")
-    public PageInfo<Brand> findAllByPage(int page, int size) {
+    public PageResult<Brand> findAllByPage(int page, int size) {
 
-        List<Brand> brandList = brandService.findAllByPage(page, size);
-        PageInfo<Brand> pageInfo = new PageInfo<Brand>(brandList);
-        return pageInfo;
+        PageResult<Brand> pageResult = brandService.findAllByPage(page, size);
+
+
+        return pageResult;
+
+
     }
 
     //搜索条件查询全部
@@ -40,10 +46,9 @@ public class BrandController {
 
     //分页搜索条件查询全部
     @PostMapping("/findAllBySearchAndPage")
-    public PageInfo<Brand> findAllBySearchAndPage(@RequestBody Map searchMap, int page, int size) {
-        List brandList = brandService.findAllBySearchAndPage(searchMap, page, size);
-        PageInfo<Brand> pageInfo = new PageInfo<>(brandList);
-        return pageInfo;
+    public PageResult<Brand> findAllBySearchAndPage(@RequestBody Map searchMap, int page, int size) {
+        PageResult<Brand> pageResult = brandService.findAllBySearchAndPage(searchMap, page, size);
+        return pageResult;
     }
 
     //根据ID查询

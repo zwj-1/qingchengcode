@@ -16,7 +16,7 @@
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="plugins">
+		<!--<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageHelper">
 
@@ -28,8 +28,8 @@
 					</property>
 				</bean>
 			</array>
-		</property>
-		<!--&lt;!&ndash;配置分页插件&ndash;&gt;
+		</property>-->
+		<!--配置分页插件-->
 		<property name="plugins">
 			<array>
 				<bean class="com.github.pagehelper.PageInterceptor">
@@ -41,7 +41,7 @@
 					</property>
 				</bean>
 			</array>
-		</property>-->
+		</property>
 	</bean>
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.qingcheng.service" />
